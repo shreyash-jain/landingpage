@@ -1,4 +1,5 @@
 import * as React from "react";
+import Script from "next/script";
 import {
   PlasmicComponent,
   extractPlasmicQueryData,
@@ -23,19 +24,20 @@ export default function PlasmicLoaderPage(props: {
   const pageMeta = plasmicData.entryCompMetas[0];
   return (
     <>
-      <Script
+     <Script
+        strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=G-5000681YQH`}
-        strategy="afterInteractive"
       />
-      {/* Now we only have to append the externalIds as properties to any event that we send to google analytics */}
-      <Script id="google-analytics" strategy="afterInteractive">
-      {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
 
-          gtag('config', 'G-5000681YQH', { 'send_page_view': false });
-      `}
+      <Script strategy="lazyOnload">
+        {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-5000681YQH', {
+                    page_path: window.location.pathname,
+                    });
+                `}
       </Script>
       <PlasmicRootProvider
         loader={PLASMIC}
