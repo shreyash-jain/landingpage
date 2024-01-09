@@ -29,7 +29,7 @@ export default function PlasmicLoaderPage(props: {
         src={`https://www.googletagmanager.com/gtag/js?id=G-5000681YQH`}
       />
 
-      <Script strategy="lazyOnload">
+      <Script id="gtm-script" strategy="lazyOnload">
         {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
