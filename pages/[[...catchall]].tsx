@@ -22,6 +22,16 @@ export default function PlasmicLoaderPage(props: {
   }
   const pageMeta = plasmicData.entryCompMetas[0];
   return (
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5000681YQH"></script>
+    <script>
+    {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-5000681YQH');
+
+    `}
+    </script>
     <PlasmicRootProvider
       loader={PLASMIC}
       prefetchedData={plasmicData}
