@@ -23,16 +23,20 @@ export default function PlasmicLoaderPage(props: {
   const pageMeta = plasmicData.entryCompMetas[0];
   return (
     <>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-5000681YQH"></script>
-      <script>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=G-5000681YQH`}
+        strategy="afterInteractive"
+      />
+      {/* Now we only have to append the externalIds as properties to any event that we send to google analytics */}
+      <Script id="google-analytics" strategy="afterInteractive">
       {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-5000681YQH');
-  
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-5000681YQH', { 'send_page_view': false });
       `}
-      </script>
+      </Script>
       <PlasmicRootProvider
         loader={PLASMIC}
         prefetchedData={plasmicData}
